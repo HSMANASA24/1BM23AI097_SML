@@ -1,0 +1,18 @@
+def gradient_descent(X, y, decay_rate=0.01, n_iterations=1000, initial_learning_rate = 0.01):
+    m = len(y)
+    theta = np.random.randn(2) 
+    
+    for i in range(n_iterations):
+        gradients = (2/m) * X.T.dot(X.dot(theta) - y)
+        learning_rate = initial_learning_rate / (1 + decay_rate * i)
+        theta -= learning_rate * gradients
+        error = np.mean((X.dot(theta)-y) ** 2)
+        
+        if error > 0.1:
+            i += 1
+        break
+    return gradients
+    return theta
+theta_gd = gradient_descent(X, y)
+print("\ngradient Descent:")
+print(f"Intercept: {theta_gd[0]}, Slope: {theta_gd[1]}")    
